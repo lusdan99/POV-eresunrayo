@@ -1,0 +1,96 @@
+#include "colors.inc"
+#include "textures.inc"
+#declare Rnd_1 = seed (547);   
+#declare Rnd_2 = seed (837);
+#declare Rnd_3 = seed (374);
+#declare Rnd_4 = seed (468);
+#declare Rnd_5 = seed (646);
+// La posicion de la camara
+camera {
+ location <-3,4,5>
+ look_at <0,1,0>
+}      
+plane {
+    y, 0
+    pigment {White}
+}
+// Punto de luz
+light_source {
+ <-2,20,-10>
+ color rgb <1,1,1> // White
+}
+#declare big_ball =
+union {
+    difference {
+        sphere { <0,0,0> 2}
+        plane { y, -1.9} 
+    }
+}
+
+#declare crystal_ball =
+difference {
+    object {big_ball}
+    #for (r, 0.01, 0.1, 0.0002)
+        #local X = 4*rand(Rnd_1)-2;
+        #local Y = 4*rand(Rnd_2)-2;
+        #local Z = 4*rand(Rnd_3)-2;
+        #local mag = sqrt(X*X+Y*Y+Z*Z);
+        #local d = 1.9*rand(Rnd_4)/mag;
+        #if (d < 0.5)
+            #local d = d*100*(rand(Rnd_5));
+        #end
+        #local X = X*d;
+        #local Y = Y*d;
+        #local Z = Z*d;
+        sphere {<X,Y,Z> r}
+    #end
+}
+
+object{
+    crystal_ball 
+    translate<0,1.9,0>
+    texture{Orange_Glass}
+    finish{
+        ambient 0
+        brilliance 0
+        diffuse 0 
+        reflection 0.25
+        specular 1
+        roughness 0.01
+        irid {
+          0.1
+          thickness .8
+          turbulence .9
+        }
+        phong 0.9
+        phong_size 50
+    }
+    photons { 
+        target
+        refraction on
+        reflection on
+    }
+}
+
+// adding a photon{} block to global_settings activates photon mapping.
+// photons also need to be adjusted for light sources and objects.
+global_settings {
+  photons {
+                     // specify the density of photons
+    count 10000
+    media 100               // alternatively use a total number of photons
+
+    //gather min, max            // amount of photons gathered during render [20, 100]
+    //media max_steps [,factor]  // media photons
+    //jitter 1.0                 // jitter phor photon rays
+    //max_trace_level 5          // optional separate max_trace_level
+    //adc_bailout 1/255          // see global adc_bailout
+    //save_file "filename"       // save photons to file
+    //load_file "filename"       // load photons from file
+    //autostop 0                 // photon autostop option
+    //radius 10                  // manually specified search radius
+    // (---Adaptive Search Radius---)
+    //steps 1
+    //expand_thresholds 0.2, 40
+  }
+}

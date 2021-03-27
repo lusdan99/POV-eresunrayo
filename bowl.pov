@@ -2,7 +2,7 @@
 // La posicion de la camara
 camera {
  location <3,10,13>
- look_at <0,0,0>
+ look_at <0,2,0>
 }
 // Punto de luz
 light_source {
@@ -39,11 +39,11 @@ union {
             translate <0,0.08,0>
         }
         intersection {
-            sphere { <0,4.5,0>, 4.4 }
+            sphere { <0,4.5,0>, 4.25 }
             plane { y, 3.5 pigment{White transmit 1}}
             translate <0,0.08,0> 
         }    
-        torus { 4.335, 0.047 translate <0,3.58,0>}
+        torus { 4.255, 0.13 translate <0,3.54,0>}
     }
 }
 
@@ -59,6 +59,5 @@ object {
         phong_size 150
         reflection 0.03
         metallic
- 
     }
 }
