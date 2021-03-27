@@ -3,12 +3,16 @@
 #include "glass.inc" 
 
 light_source {
- <10, 20, 5>
+ <0, 40, 40>
  color rgb <1, 1, 1>
+  photons{
+      refraction on
+      reflection on
+    }
 }
  
 camera {
- location <5,10,-15>
+ location <5,7,-10>
  //location<0,20,0>
  look_at <0.5,4,0>
 }
@@ -322,21 +326,29 @@ difference{
       
       material{
        texture {
-        pigment {color rgbf <1, 1.0, 1, 0.4> }
+        pigment {color rgbf <1, 1.0, 1, 1> }
         finish { F_Glass4 }
  
     } 
-    interior {I_Glass caustics 1}
-     
+    interior {
+            I_Glass caustics 1
+        }
+    }    
+    photons { 
+        target
+        refraction on
+        reflection on
     }
-    normal{wrinkles 0.4 scale 0.5}
+     
+    
+    normal{wrinkles 0.4 scale 0.55}
     
     
     translate<-10, 0, 10 >
     scale<0.35, 0.2,0.2>
+    }
 
 
-}
 
 //############################################################################
 //ROBERTINHO O CUENCO
@@ -444,22 +456,39 @@ object{
     crystal_ball 
     translate<-2,1.9,-2>
     scale<0.65, 0.65, 0.65>
-    texture{Orange_Glass}
-    finish{
-        ambient 0
-        brilliance 0
-        diffuse 0 
-        reflection 0.25
-        specular 1
-        roughness 0.01
-        irid {
-          0.1
-          thickness .8
-          turbulence .9
+     material{
+        texture{
+            pigment{ rgbf <0.474, 0.133, 0.047, 0.9>}
+            finish{                 
+                ambient 0.15
+                diffuse 0.1
+                refraction 1
+                reflection 0.2
+                specular 1
+                roughness 0.001
+                phong 0.9
+                phong_size 200
+            }
+        }    
+        interior {
+            ior 1.5
         }
-        phong 0.6
-        phong_size 500
+    }    
+    photons { 
+        target
+        refraction on
+        reflection on
     }
 }
+
+
+global_settings {
+    photons {
+        spacing 0.005
+    }
+    assumed_gamma 1.0
+    max_trace_level 5
+}
+
 
  
