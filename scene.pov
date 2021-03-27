@@ -178,9 +178,9 @@ pigment {   color rgb <0.2, 0.4, 0> }
 
 } 
 
- rotate <0,3,0> 
+ rotate <0,15,0> 
  
- translate <1,0,8>
+ translate <-3,0,8>
 
  scale <0.2, 0.2, 0.2>
 } 
@@ -363,7 +363,7 @@ difference{
     normal{wrinkles 0.4 scale 0.55}
     
     
-    translate<-10, 0, 10 >
+    translate<-12, 0, 17 >
     scale<0.25, 0.17,0.15>
     }
 
