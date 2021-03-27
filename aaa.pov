@@ -12,8 +12,8 @@ texture { T0
 #declare T3 = texture { T translate -x*10 rotate  <-50, 100, 0> translate z*100}
 
 camera {
- location <6,20,-30>
- look_at <0,5,20>
+ location <6,8,-10>
+ look_at <0,1,2>
 }
 light_source {
  <-20, 24, -20>

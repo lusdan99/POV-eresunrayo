@@ -1,45 +1,61 @@
+//############################################################################
+//Imports
+//############################################################################
+
 #include "colors.inc" 
 #include "woods.inc"  
-#include "glass.inc" 
+#include "glass.inc"
+#include "crystal_ball.inc"
+#include "bowl.inc" 
 
+//############################################################################
+//Scene setting
+//############################################################################
+
+//Light source
 light_source {
- <0, 40, 40>
- color rgb <1, 1, 1>
-  photons{
-      refraction on
-      reflection on
+    <15, 50, 70>
+    color rgb <1, 1, 1>
+    parallel
+    photons{
+        refraction on
+        reflection on
     }
 }
- 
+
+//Camera 
 camera {
- location <5,7,-10>
- //location<0,20,0>
- look_at <0.5,4,0>
+    location <0,4,-7>
+    look_at <0,2,0>
+    right x*image_width/image_height
 }
 
-plane { // Floor
- <0,-1,0>, 0 //Normal and distance
- texture {
- pigment {
-  color rgb <1, 1, 1> 		
-
- }
-   finish {
-			//brightness 1.0
+//Floor
+plane { 
+    <0,-1,0>, 0 
+    texture {
+        pigment {
+            color rgb <1, 1, 1> 		
+        }
+        finish {
 			diffuse 1.0
-
-		} 
- }
+        } 
+    }
 }  
 
-  sky_sphere {
-    pigment {   color rgb <0.1, 0.1, 0.1> }
+//Background
+box {
+    <0,0,0>, <1,1,1>
+    pigment{color rgb <0.168, 0.180, 0.152>}
+    scale <40,13,1>
+    rotate <0,-20,0>
+    translate <-15,0,15>
 }
-  
 
-//##############################################################################
-//CAJA
-//############################################################################## 
+//############################################################################
+//Incense burner
+//############################################################################
+
 #declare T0 = texture { T_Wood9 }
 #declare T =
 texture { T0
@@ -169,10 +185,10 @@ pigment {   color rgb <0.2, 0.4, 0> }
  scale <0.2, 0.2, 0.2>
 } 
 
-//############################################################################################################
-//PORTAVELAS
-//###########################################################################################################
-   
+//############################################################################
+//Candle holder
+//############################################################################  
+ 
 union{
 
 difference{
@@ -348,143 +364,35 @@ difference{
     
     
     translate<-10, 0, 10 >
-    scale<0.35, 0.2,0.2>
+    scale<0.25, 0.17,0.15>
     }
 
 
 
 //############################################################################
-//ROBERTINHO O CUENCO
+//White bowl
 //############################################################################
-
-#declare base_bowl =
-union {
-    //Base sides
-    difference {
-        torus { 4, 2 pigment{White transmit 1}translate <0,0.1,0>}
-        torus { 5, 2.825} 
-    }
-    //Base bottom
-    cylinder { <0,-0.69,0>, <0,-0.68,0>, 2.119}   
-} 
-
-#declare bowl =
-union {
-    //Base
-    object {base_bowl scale <1,0.6,1>} 
-    //Semisphere
-    union{        
-        intersection {
-            sphere { <0,4.5,0>, 4.5  } 
-            plane { y, 3.5 pigment{White transmit 1}}
-            translate <0,0.08,0>
-        }
-        intersection {
-            sphere { <0,4.5,0>, 4.4 }
-            plane { y, 3.5 pigment{White transmit 1}}
-            translate <0,0.08,0> 
-        }    
-        torus { 4.335, 0.047 translate <0,3.58,0>}
-    }
-}
 
 object {
     bowl 
-    translate <8,0.66,-3>
-    scale<0.3,0.3,0.3> 
-    pigment {White}
-    finish{
-        ambient 0.3
-        brilliance 0.7
-        specular 0.9
-        phong 0.9
-        phong_size 150
-        reflection 0.03
-        metallic
- 
-}
-
+    translate <6.2,0.66,-5.6>
+    scale<0.25,0.25,0.25> 
 }
 
 //###############################################################################
-//LAS PELOTAS
+//Crystal ball
 //############################################################################### 
 
-#include "textures.inc"
-#declare Rnd_1 = seed (547);   
-#declare Rnd_2 = seed (837);
-#declare Rnd_3 = seed (374);
-#declare Rnd_4 = seed (468);
-#declare Rnd_5 = seed (646);
-// La posicion de la camara
-#declare big_ball =
-union {
-    difference {
-        sphere { <0,0,0> 2}
-        plane { y, -1.9} 
-    }
+object {
+    crystal_ball
+    translate<-3,1.9,-1.1>
+    scale<0.575, 0.575 0.575>
 }
-
-#declare crystal_ball =
-union {
-    object {big_ball}
-    #for (r, 0.01, 0.1, 0.0002)
-        #local X = 4*rand(Rnd_1)-2;
-        #local Y = 4*rand(Rnd_2)-2;
-        #local Z = 4*rand(Rnd_3)-2;
-        #local mag = sqrt(X*X+Y*Y+Z*Z);
-        #local d = 1.9*rand(Rnd_4)/mag;
-        #if (d < 0.3)
-            #local d = d*(rand(Rnd_5)+1.5);
-        #end
-        #local X = X*d;
-        #local Y = Y*d;
-        #local Z = Z*d;
-        sphere { 
-            <X,Y,Z> r 
-            /*pigment {Orange}
-            finish {
-                ambient 0.9
-                brilliance 1
-                diffuse 0 
-                reflection 0.2
-                specular 1
-                roughness 0.01 
-            }*/
-        }
-    #end
-}
-
-object{
-    crystal_ball 
-    translate<-2,1.9,-2>
-    scale<0.65, 0.65, 0.65>
-     material{
-        texture{
-            pigment{ rgbf <0.568, 0.160, 0.056, 0.9>}
-            finish{                 
-                ambient 0.2
-                diffuse 0.1
-                refraction 1
-                reflection 0.2
-                specular 1
-                roughness 0.001
-                phong 0.9
-                phong_size 200
-            }
-        }    
-        interior {
-            ior 1.5
-        }
-    }    
-    photons { 
-        target
-        refraction on
-        reflection on
-    }
-}
-
-
+ 
+//###############################################################################
+//Photons settings
+//###############################################################################  
+ 
 global_settings {
     photons {
         spacing 0.005

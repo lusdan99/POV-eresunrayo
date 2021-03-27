@@ -7,7 +7,7 @@
 #declare Rnd_5 = seed (646);
 // La posicion de la camara
 camera {
- location <-3,5,8>
+ location <-3,40,50>
  look_at <0,1,0>
 }      
 plane {
