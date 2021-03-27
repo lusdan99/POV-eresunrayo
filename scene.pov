@@ -327,7 +327,10 @@ difference{
       material{
        texture {
         pigment {color rgbf <1, 1.0, 1, 1> }
-        finish { F_Glass4 }
+        finish { refraction 1
+                 reflection 0.1
+                 specular 1
+                 ambient 0.3    }
  
     } 
     interior {
@@ -458,9 +461,9 @@ object{
     scale<0.65, 0.65, 0.65>
      material{
         texture{
-            pigment{ rgbf <0.474, 0.133, 0.047, 0.9>}
+            pigment{ rgbf <0.568, 0.160, 0.056, 0.9>}
             finish{                 
-                ambient 0.15
+                ambient 0.2
                 diffuse 0.1
                 refraction 1
                 reflection 0.2
