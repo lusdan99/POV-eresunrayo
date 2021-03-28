@@ -1,0 +1,132 @@
+#include "colors.inc" 
+#include "woods.inc"  
+#include "glass.inc"
+
+#declare T0 = texture { T_Wood9 }
+#declare T =
+texture { T0
+    finish { specular 0.70 roughness 0.5 ambient 0.3 }
+}
+
+
+#declare T3 = texture { T translate -x*10 rotate  <-50, 100, 0> translate z*100}
+
+union{ 
+difference{
+ box {
+    <0, 0, 0> <12, 10, 8>
+        texture { T_Wood10
+            finish { specular 0.2 roughness 0.05 ambient 0.35 }
+            translate x*1
+            rotate <0, 20, 0>
+        }
+ 
+ 
+
+  }
+ 
+ union{
+   sphere{ <6, 4.5, 4>, 5}
+  cylinder{<6,4.5,4>,<6,12,4>, 1.5}
+   pigment { color rgbf <0.98, 1.0, 0.99, 0.75> }
+          finish { F_Glass4 }
+          }
+ 
+  
+ }
+
+  
+union{
+difference{
+
+difference{
+
+difference{
+    sphere { <6, 4.5, 4>, 5
+      // texture { T_Glass4 } interior {I_Glass caustics 1}
+      // converted to material 26Sep2008 (jh)
+      material {
+        texture {
+          pigment { color rgbf <0.98, 1.0, 0.99, 0.75> }
+          finish { F_Glass4 }
+          }
+        //interior {I_Glass caustics 1}
+    }  
+    }
+    
+  union{
+    
+ cylinder{<6,4.5,4>,<6,12,4>, 2}
+   pigment { color rgbf <0.98, 1.0, 0.99, 0.75> }
+          finish { F_Glass4 }
+          }
+ 
+  box {
+    <0, 0, 0> <12, 0.5, 8>
+    texture {
+    T3
+ 
+    }
+  }
+ 
+          
+ }        
+ 
+ 
+ }
+ 
+
+ sphere{<6,4.5,4>, 4.5
+ 
+ texture {
+          pigment { color rgbf <0.98, 1.0, 0.99, 0.75> }
+          finish { F_Glass4 }
+          }
+ 
+ }
+
+}
+ 
+cylinder{
+
+<5,0.5,1>, 
+<12,30,7>,
+0.2
+
+pigment {   color rgb <0.2, 0.4, 0> }
+
+
+}   
+
+cylinder{
+
+<6,0.5,2>, 
+<6,30,8>,
+0.2
+
+pigment {   color rgb <0.2, 0.4, 0> }
+
+
+}
+
+cylinder{
+
+<8,0.5,1>, 
+<0,30,6>,
+0.2
+
+pigment {   color rgb <0.2, 0.4, 0> }
+
+
+} 
+
+
+
+} 
+
+ rotate <0,3,0> 
+ 
+ translate <1,0,8>
+
+ scale <0.2, 0.2, 0.2>
+} 
