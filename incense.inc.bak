@@ -41,7 +41,7 @@ difference {
 }
 
 #declare green_goo =
-cylinder {<5,0.02,4>,<5,2,4> 2.498
+cylinder {<5,0.02,4>,<5,2.125,4> 2.498
     texture{  
         pigment{rgb <0.645, 0.831, 0.268>}
         normal{
@@ -64,17 +64,17 @@ union {
     object{glass_cylinder}
     object{green_goo}
     object{incense
-        scale<1,0.97,1>
+        scale<1,0.88,1>
         translate<6.7,-1,4.8>
         rotate<-5,0,15>    
     }
     object{incense
-        scale<1,1.1,1>
+        scale<1,1,1>
         translate<5.6,-1,2.9>
         rotate<10,0,5>    
     }
     object{incense
-        scale<1,1.07,1>
+        scale<1,0.97,1>
         translate<2.5,-1,4.3>
         rotate<-5,0,-15>    
     }

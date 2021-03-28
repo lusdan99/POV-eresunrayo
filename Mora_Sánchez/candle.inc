@@ -1,5 +1,3 @@
-#include "glass.inc"      
-
 #declare candle_holder =
 union{
     difference{
@@ -76,16 +74,19 @@ union{
     }
     material{
         texture {
-            pigment {color rgbf <1, 1.0, 1, 1> }
-            finish { 
+            pigment {color rgbf <1, 1.0, 1, 0.9> }
+            finish {
+                ambient 0.4
+                diffuse 0.7 
                 refraction 1
-                reflection 0.1
-                specular 1
-                ambient 0.3    
+                reflection 0.05
+                specular 0.9
+                phong 0.6
+                phong_size 200    
             }
         } 
         interior {
-            I_Glass caustics 1
+            ior 1.3
         }
     }    
     photons { 
@@ -93,5 +94,5 @@ union{
         refraction on
         reflection on
     }
-    normal{wrinkles 0.4 scale 0.55}
+    normal{wrinkles 0.4 scale 0.9}
 }
