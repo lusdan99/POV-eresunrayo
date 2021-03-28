@@ -3,45 +3,6 @@
 #include "glass.inc"
 #include "textures.inc"
 
-//Light source
-light_source {
-    <15, 50, 70>
-    color rgb <1, 1, 1>
-    parallel
-    photons{
-        refraction on
-        reflection on
-    }
-}
-
-//Camera 
-camera {
-    location <5,15,-25>
-    look_at <5,12,4>
-    right x*image_width/image_height
-}
-
-//Floor
-plane { 
-    <0,-1,0>, 0 
-    texture {
-        pigment {
-            color rgb <1, 1, 1> 		
-        }
-        finish {
-			diffuse 1.0
-        } 
-    }
-}
-
-#declare T0 = texture { T_Wood9 }
-#declare T =
-texture { T0
-    finish { specular 0.70 roughness 0.5 ambient 0.3 }
-}
-
-#declare T3 = texture { T translate -x*10 rotate  <-50, 100, 0> translate z*100}
-
 #declare wooden_box = 
 union{
     difference{
@@ -80,7 +41,7 @@ difference {
 }
 
 #declare green_goo =
-cylinder {<5,0.02,4>,<5,2,4> 2.498
+cylinder {<5,0.02,4>,<5,2.125,4> 2.498
     texture{  
         pigment{rgb <0.645, 0.831, 0.268>}
         normal{
@@ -103,17 +64,18 @@ union {
     object{glass_cylinder}
     object{green_goo}
     object{incense
+        scale<1,0.88,1>
         translate<6.7,-1,4.8>
         rotate<-5,0,15>    
     }
     object{incense
-        translate<4.8,-1,2.3>
-        rotate<10,0,-5>    
+        scale<1,1,1>
+        translate<5.6,-1,2.9>
+        rotate<10,0,5>    
     }
     object{incense
+        scale<1,0.97,1>
         translate<2.5,-1,4.3>
         rotate<-5,0,-15>    
     }
 }
-
-object{incense_burner}  

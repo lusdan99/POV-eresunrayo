@@ -16,8 +16,8 @@ light_source {
 
 //Camera 
 camera {
-    location <5,15,-25>
-    look_at <5,12,4>
+    location <5,15,4>
+    look_at <5,10,4>
     right x*image_width/image_height
 }
 
@@ -103,14 +103,17 @@ union {
     object{glass_cylinder}
     object{green_goo}
     object{incense
+        scale<1,0.97,1>
         translate<6.7,-1,4.8>
         rotate<-5,0,15>    
     }
     object{incense
-        translate<4.8,-1,2.3>
-        rotate<10,0,-5>    
+        scale<1,1.1,1>
+        translate<5.6,-1,2.9>
+        rotate<10,0,5>    
     }
     object{incense
+        scale<1,1.07,1>
         translate<2.5,-1,4.3>
         rotate<-5,0,-15>    
     }
