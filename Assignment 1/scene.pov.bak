@@ -1,0 +1,284 @@
+//############################################################################
+//Imports
+//############################################################################
+
+#include "colors.inc" 
+#include "woods.inc"  
+#include "glass.inc"
+#include "incense.inc"
+#include "bowl.inc"
+#include "crystal_ball.inc" 
+
+//############################################################################
+//Scene setting
+//############################################################################
+
+//Light source
+light_source {
+    <10, 50, 55>
+    color rgb <1, 1, 1>
+    parallel
+    photons{
+        refraction on
+        reflection on
+    }
+}
+
+//Camera 
+camera {
+    location <0,4,-7>
+    look_at <0,2,0>
+    right x*image_width/image_height
+}
+
+//Floor
+plane { 
+    <0,-1,0>, 0 
+    texture {
+        pigment {
+            color rgb <1, 1, 1> 		
+        }
+        finish {
+			diffuse 1.0
+        } 
+    }
+}  
+
+//Background
+box {
+    <0,0,0>, <1,1,1>
+    pigment{color rgb <0.168, 0.180, 0.152>}
+    scale <40,18,1>
+    rotate <0,-20,0>
+    translate <-15,0,15>
+}
+
+//############################################################################
+//Incense burner
+//############################################################################
+
+object{
+    incense_burner
+    rotate <0,18,0> 
+    translate <-1.5,0,4.7>
+    scale <0.22, 0.22, 0.22>
+} 
+
+//############################################################################
+//Candle holder
+//############################################################################  
+ 
+union{
+
+difference{
+ 
+    union{
+      prism {
+        linear_sweep
+        linear_spline
+        0, 
+        16.5, 
+        4,
+        <6,0>, <0,10>, <12,10>, <6,0>  
+    
+     } 
+     
+        prism{
+        
+        linear_sweep
+        linear_spline
+        0, 
+        20, 
+        4,
+        <6,13>, <0,3>, <12,3>, <6,13> 
+        }
+     
+
+        prism{
+        
+        linear_sweep
+        linear_spline
+        0, 
+        15, 
+        7,
+        <3,2>, <0.5,7>, <3,12>, <9,12>, <11.5,7>,<9,2>, <3,2>  
+        }
+     
+
+      
+     
+    }
+    
+    intersection{
+    
+        prism {
+        linear_sweep
+        linear_spline
+        3, 
+        23, 
+        4,
+        <6,0>, <0,10>, <12,10>, <6,0>  
+    
+     } 
+     
+        prism{
+        
+        linear_sweep
+        linear_spline
+        3, 
+        23, 
+        4,
+        <6,13>, <0,3>, <12,3>, <6,13> 
+        }     
+        
+
+     
+
+    
+    } 
+   
+   
+      prism {
+        linear_sweep
+        linear_spline
+        16.6, 
+        23.5, 
+        4,
+        <6,0>, <0,9.75>, <12,9.75>, <6,0>
+
+    
+     }
+     
+        
+       box {
+    <5, 20, 1> <7, 0, 0>
+
+   } 
+   
+   
+          box {
+    <5, 23, 13> <7, 0, 12>
+
+   }
+     
+   
+   
+   
+   
+  
+        prism {
+        linear_sweep
+        linear_spline
+        -1, 
+        23.5, 
+        5,
+        <1.5,2>, <0,5>, <-2,5>, <-2,2>, <1.5,2>
+
+    
+     }
+    
+    
+     
+        prism {
+        linear_sweep
+        linear_spline
+        -1, 
+        23.5, 
+        5,
+        <10.5,2>, <12,5>, <14,5>, <14,2>, <10.5,2>
+  
+    
+     }
+      
+      
+              prism {
+        linear_sweep
+        linear_spline
+        -1, 
+        23.5, 
+        5,
+        <1.5,12>, <0,9>, <-2,9>, <-2,12>, <1.5,12>
+
+    
+     }
+     
+     
+              prism {
+        linear_sweep
+        linear_spline
+        -1, 
+        23.5, 
+        5,
+        <10.5,12>, <11.5,9>, <14,9>, <14,12>, <10.5,12>
+
+     }
+     
+     
+    
+     
+     
+}
+      
+      material{
+       texture {
+        pigment {color rgbf <1, 1.0, 1, 1> }
+        finish { refraction 1
+                 reflection 0.1
+                 specular 1
+                 ambient 0.3    }
+ 
+    } 
+    interior {
+            I_Glass caustics 1
+        }
+    }    
+    photons { 
+        target
+        refraction on
+        reflection on
+    }
+     
+    
+    normal{wrinkles 0.4 scale 0.55}
+    
+    rotate<0,5,0>
+    translate<-11, 0, 13>
+    scale<0.3, 0.17,0.2>
+    }
+
+
+
+//############################################################################
+//White bowl
+//############################################################################
+
+object {
+    bowl 
+    translate <6,0.66,-6>
+    scale<0.25,0.25,0.25> 
+}
+
+//###############################################################################
+//Crystal ball
+//############################################################################### 
+
+object {
+    crystal_ball
+    translate<-3,1.9,-1.1>
+    scale<0.575, 0.575 0.575>
+}
+ 
+//###############################################################################
+//Photons settings
+//###############################################################################  
+ 
+global_settings {
+    photons {
+        spacing 0.005
+    }
+    assumed_gamma 1.0
+    max_trace_level 5
+} 
+
+
+ 
