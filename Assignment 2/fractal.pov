@@ -32,6 +32,9 @@ camera {
 //Basic ring components
 //############################################################################ 
 
+/*
+/ This element is the smallest ring visible in the image, the border of the bigger ring
+*/
 #declare basic_ring=
 merge {
     cylinder{ <0,0.02,0>,<0,0.03,0>, 0.2
@@ -42,6 +45,10 @@ merge {
     }
 }
 
+/*
+/ This is formed by smaller rings, we use the initial angle to calculate where the next basic ring should be placed
+/ A total of 36 rings are placed, to make a full circle, although the last one if cut off by another ring to avoid superposition
+*/
 #declare full_ring=
 union{ 
     object{basic_ring
@@ -69,6 +76,9 @@ union{
     }
 }
 
+/*
+/ The basic circle is a black circle with two concentric rings placed on its edge
+*/
 #declare basic_circle=
 union{
     cylinder { <0,0,0>,<0,0.01,0>, 1 
@@ -91,7 +101,12 @@ union{
 //Flower components
 //############################################################################ 
 
-#declare flower_arm=
+/*
+/ Each arm is formed by basic circles which start out small and then get increasingly bigger
+/ Each circle covers the previous one slightly, and its center is calculated depending on the initial angle,
+/ which gives it its distinctive petal form
+*/
+#declare flower_petal=
 union{ 
     object{basic_circle
         scale 0.01
@@ -111,14 +126,16 @@ union{
     #end
 }
 
-object {flower_arm}
-
-
+/*
+/ The staircase is formed by flower petals, which go around in circles to form a flower that actually goes up in the 
+/ y axis. They are also rotated with respect to the X and Z axis in order to make it look smoother and give it more of a 
+/ ramp look
+*/
 #declare flower_staircase =
 union {
     #for (i, 1, 720, 1.5)
         object {
-            flower_arm
+            flower_petal
             rotate <10,10*i,10>
             translate <0,0.25*i,0>
         }        
@@ -126,11 +143,15 @@ union {
     scale <2,1,2>
 }                     
 
+/*
+/ The floor follows a similar logic to the staircase, except only 36 petals are placed in order to form a circle, it is
+/ also scaled so that it covers the entire floor of the image
+*/
 #declare flower_floor =
 union {
     #for (i, 1, 36, 1.5)
         object {
-            flower_arm
+            flower_petal
             rotate <10,10*i,10>
             translate <0,0.15*i,0>
         }        

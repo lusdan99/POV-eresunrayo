@@ -12,7 +12,7 @@
 
 //Light source
 light_source {
-    <0, 15, 0>
+    <-130, 100, 65>
     color rgb <1, 1, 1>
     parallel
     photons{
@@ -23,16 +23,10 @@ light_source {
 
 //Camera 
 camera {
-    location <2,10,-2>
-    look_at <2,0,-2>
+    location <0,110,110>
+    look_at <0,5,0>
     right x*image_width/image_height
 }
-
-//Floor
-plane { 
-    y, -5  
-    pigment {Green}
-} 
   
 //############################################################################
 //Basic ring components
@@ -56,7 +50,8 @@ union{
     #local X = 0.001*cos(A);
     #local Z = 0.001*sin(A);
     #for (i, 1, 35, 1)
-        object { basic_ring
+        object { 
+            basic_ring
             translate <X,0.002*i,Z>
         }
         #local A = radians(degrees(A)-10);
@@ -104,9 +99,10 @@ union{
     #local A = radians(30);
     #local X = 0.001*cos(A);
     #local Z = 0.001*sin(A);
-    #for (i, 0.1, 1, 0.05)
-        object { basic_circle
-            translate <X,-0.8*i,Z>
+    #for (i, 0.1, 1.2, 0.05)
+        object { 
+            basic_circle
+            translate <X,-0.9*i,Z>
             scale i
         }
         #local A = radians(degrees(A)-10);
@@ -115,10 +111,35 @@ union{
     #end
 }
 
+object {flower_arm}
 
-#declare flower =
+
+#declare flower_staircase =
 union {
-    object{flower_arm}
+    #for (i, 1, 720, 1.5)
+        object {
+            flower_arm
+            rotate <10,10*i,10>
+            translate <0,0.25*i,0>
+        }        
+    #end 
+    scale <2,1,2>
 }                     
 
-object{flower}
+#declare flower_floor =
+union {
+    #for (i, 1, 36, 1.5)
+        object {
+            flower_arm
+            rotate <10,10*i,10>
+            translate <0,0.15*i,0>
+        }        
+    #end
+    scale <50,1,50>
+    rotate <0,55,0>
+}
+ 
+union {
+    object{flower_staircase}
+    object{flower_floor}
+} 
