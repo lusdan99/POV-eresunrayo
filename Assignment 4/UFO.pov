@@ -1,11 +1,33 @@
 //############################################################################
-//Imports
+//Imports & materials
 //############################################################################
 
 #include "colors.inc"
 #include "textures.inc"
 #include "woods.inc"
-
+ 
+#declare transparent_with_media = material{
+	texture {
+		pigment {
+			rgbt 1 
+		}
+		finish {
+			ambient 0
+			diffuse 0
+		}
+	}
+	interior{
+		media {
+			scattering {
+				1, 
+				rgb <0.1, 0.1, 0.1>
+				extinction 0.000001
+			}
+			samples 20,50
+		}
+	}
+} 
+ 
 //############################################################################
 //Scene setting
 //############################################################################
@@ -23,7 +45,7 @@ light_source {
 
 //Camera 
 camera {
-    location <0,0.8,1.5>
+    location <0,1,1.5>
     look_at <0,0.8,0>
     right x*image_width/image_height
 }
@@ -33,13 +55,15 @@ camera {
     <0,-1,0>, 0 
     texture {
         pigment {
-            color rgb <1, 1, 1> 		
+            color rgb <0.8, 0.5, 0.3> 		
         }
         finish {
 			diffuse 1.0
         } 
     }
 }*/
+  
+
   
 //############################################################################
 //Basic ring components
@@ -50,7 +74,26 @@ intersection {
     difference {
         sphere { 
             <0,0,0>, 1 
-            pigment {Red}
+            material{
+                texture{  
+                    pigment{rgb <0.39, 0.41, 0.43>}
+                    finish{
+                        ambient 0.2
+                        brilliance 3
+                        diffuse 0.3
+                        specular 1
+                        phong 0.9
+                        phong_size 20
+                        roughness 1/100
+                        reflection 0.1
+                        metallic
+                    }
+                }
+            }
+            photons {
+                refraction on
+                reflection on
+            }
         }  
         plane {
             y, 0.8
@@ -64,17 +107,46 @@ intersection {
 }
 
 #declare ufo_base_ring=
-    #local A = radians(20);
-    #for (i, 1, 18, 1)
-        #local A = radians(degrees(A)+20);
-        #local X = 0.5*cos(A);
-        #local Z = 0.5*sin(A);
-        sphere { 
-            <X,0.75,Z>,0.03
-            pigment {Cyan}
-        }
+#local A = radians(20);
+#for (i, 1, 18, 1)
+    #local A = radians(degrees(A)+20);
+    #local X = 0.5*cos(A);
+    #local Z = 0.5*sin(A);
+    light_source {
+        <1*X,0.74,1*Z>
+        color White*0.5       
+        photons{
+            refraction on
+            reflection on
+        }                     
+    }     
+    sphere { 
+        <X,0.75,Z>, 0.03 
+        material{
+            texture{
+                pigment{ rgbf <0.345, 0.968, 0.992, 0.1>}
+                finish{                 
+                    ambient 0.1
+                    diffuse 0.5      
+                    reflection 0.9
+                    specular 1
+                    roughness 0.001
+                    phong 0.9
+                    phong_size 20
+                }
+            }    
+            interior {
+                ior 1
+            }
         
-    #end
+        }
+        photons { 
+            target
+            refraction on
+            reflection on
+        }                        
+    }
+#end
 
 #declare ufo_base=
 union{
@@ -86,14 +158,68 @@ union{
     }     
     cylinder { 
         <0,0.68,0>,<0,0.69,0>, 0.3 
-        pigment { Blue }
+        material{
+            texture{  
+                pigment{rgbf <0.760, 0.866, 0.878, 0.6>}
+                finish{
+                    ambient 0.1
+                    diffuse 0.2
+                    refraction 1
+                    reflection 0.3
+                    specular 1
+                    roughness 0.001
+                    phong 0.9
+                    phong_size 20
+                }
+            }
+            interior {
+                ior 1.5
+            }
+        }
+        photons {
+            target 
+            refraction on
+            reflection on
+        }
+    }
+    light_source{
+        <0,0.68,0>
+        color Cyan*2
+        spotlight
+        radius 45
+        falloff 60
+        tightness 10
+        point_at <0, 0, 0>       
+        photons{
+            refraction on
+            reflection on
+        }
     } 
 }
 
 #declare ufo_base_edge=
 cylinder { 
     <0,-0.0075,0>,<0,0.0075,0>, 0.6+0.01 
-    pigment { Green }
+    material{
+        texture{  
+            pigment{rgb <0.145, 0.152, 0.149>}
+            finish{
+                ambient 0.3
+                brilliance 0.6
+                diffuse 0.3
+                specular 1
+                phong 0.9
+                phong_size 2
+                roughness 1/100
+                reflection 0.1
+                metallic
+            }
+        }
+    }
+    photons { 
+        refraction on
+        reflection on
+    }
     translate <0,0.8,0>
 }
 
@@ -102,7 +228,26 @@ union{
     difference{
         sphere { 
             <0,0.9,0>, 0.28 
-            pigment {Blue}
+            material{
+                texture{  
+                    pigment{rgbf <0.760, 0.866, 0.878, 0.4>}
+                    finish{
+                        ambient 0.1
+                        diffuse 0.2
+                        refraction 1
+                        reflection 0.3
+                        specular 1
+                        roughness 0.001
+                        phong 0.9
+                        phong_size 20
+                    }
+                }
+            }
+            photons {
+                target 
+                refraction on
+                reflection on
+            }
         }  
         plane {
             y, 0.96
@@ -112,7 +257,26 @@ union{
     difference{
         torus { 
             0.28,0.015 
-            pigment {Orange}
+            material{
+                texture{  
+                    pigment{rgb <0.145, 0.152, 0.149>}
+                    finish{
+                        ambient 0.3
+                        brilliance 3
+                        diffuse 0.3
+                        specular 1
+                        phong 0.9
+                        phong_size 2
+                        roughness 1/100
+                        reflection 0.2
+                        metallic
+                    }
+                }
+            }
+            photons { 
+                refraction on
+                reflection on
+            }
             translate <0,0.96,0>
         }               
         plane {
@@ -122,7 +286,7 @@ union{
     }
 }
 
-#declare ufo_body=
+#declare ufo=
 union {
     object {ufo_cabin}
     object {ufo_top}
@@ -133,4 +297,13 @@ union {
     }
 }
  
-object {ufo_body}
+object {ufo}  
+ 
+global_settings {
+    photons {
+        spacing 0.005
+    }
+    assumed_gamma 1.0
+    max_trace_level 5
+}
+
