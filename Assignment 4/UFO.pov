@@ -63,26 +63,74 @@ intersection {
     }  
 }
 
+#declare ufo_base_ring=
+    #local A = radians(20);
+    #for (i, 1, 18, 1)
+        #local A = radians(degrees(A)+20);
+        #local X = 0.5*cos(A);
+        #local Z = 0.5*sin(A);
+        sphere { 
+            <X,0.75,Z>,0.03
+            pigment {Cyan}
+        }
+        
+    #end
+
 #declare ufo_base=
-object {
-    ufo_top
-    scale <1,0.8,1>
-    rotate <180,0,0>
-    translate <0,0.8+0.8*0.8,0>
+union{
+    object {
+        ufo_top
+        scale <1,0.8,1>
+        rotate <180,0,0>
+        translate <0,0.8+0.8*0.8,0>
+    }     
+    cylinder { 
+        <0,0.68,0>,<0,0.69,0>, 0.3 
+        pigment { Blue }
+    } 
 }
 
 #declare ufo_base_edge=
 cylinder { 
-    <0,-0.005,0>,<0,0.005,0>, 0.6+0.015 
+    <0,-0.0075,0>,<0,0.0075,0>, 0.6+0.01 
     pigment { Green }
     translate <0,0.8,0>
 }
 
+#declare ufo_cabin=
+union{
+    difference{
+        sphere { 
+            <0,0.9,0>, 0.28 
+            pigment {Blue}
+        }  
+        plane {
+            y, 0.96
+            pigment {transmit 1}
+        }
+    }
+    difference{
+        torus { 
+            0.28,0.015 
+            pigment {Orange}
+            translate <0,0.96,0>
+        }               
+        plane {
+            y, 0.94
+            pigment {transmit 1}
+        }
+    }
+}
+
 #declare ufo_body=
 union {
+    object {ufo_cabin}
     object {ufo_top}
     object {ufo_base_edge}
-    object {ufo_base}
+    merge{
+        object {ufo_base}
+        object {ufo_base_ring}
+    }
 }
  
 object {ufo_body}
