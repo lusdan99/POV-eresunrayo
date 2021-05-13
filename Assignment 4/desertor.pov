@@ -8,7 +8,7 @@
     look_at <3, 0.5, 1>
     angle 30
   }
-   light_source{ <-5500,5500,35> White }   
+   light_source{ <-5500,4000,35> White }   
    light_source{<12,3,35>, White}
    
    #declare wvs = normal {
@@ -41,6 +41,8 @@
 			}
    }
    
+   
+   
     height_field {
     png "dunes_heightmap.png"
     smooth
@@ -64,11 +66,33 @@ sphere{ <0,0,0>, 1
 
 
 sphere{ <12,3,35>, 1.5
-           texture{ 
-           
-        pigment{colour rgb <0.65,0.65,0.65>}  
-        finish{ambient 0.55}
+           texture{  
+               
+               pigment{average pigment_map{
+               [1 bozo color_map{[.7 rgb <0.75,0.75,0.70>]
+                                 [.85 rgb <0.75,0.75,0.70>*.8]}
+                  turbulence 1 octaves 8 omega .8 lambda 3
+                  scale .5]
+               [1 leopard color_map{[.3 rgb <0.75,0.75,0.70>]
+                                    [.5 rgb <0.75,0.75,0.70>*.8]
+                                    [.7 rgb <0.75,0.75,0.70>]}
+                  turbulence .2 octaves 8 omega .8 lambda 3
+                  scale .2]
+               [1 leopard color_map{[.2 rgb <0.75,0.75,0.70>]
+                                    [.4 rgb <0.75,0.75,0.70>*.8]
+                                    [.5 rgb <0.75,0.75,0.70>]}
+                  turbulence .2 octaves 8 omega .8 lambda 3
+                  scale .07]
+               [1 granite color_map{[0 rgb <0.75,0.75,0.70>]
+                                    [1 rgb <0.75,0.75,0.70>*.8]}
+                  scale .1]
+               }}
+       finish{ambient 0.55 diffuse .6 brilliance .3}   
+       normal { wrinkles 0.3 scale 0.10
        }
-      } //end of sphere
+       
+       }
+
+       }
 
 
