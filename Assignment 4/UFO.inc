@@ -8,18 +8,19 @@ intersection {
                     pigment{rgb <0.39, 0.41, 0.43>}
                     finish{
                         ambient 0.2
-                        brilliance 3
-                        diffuse 0.3
+                        brilliance 1
+                        diffuse 0.5
                         specular 1
                         phong 0.9
                         phong_size 20
                         roughness 1/100
-                        reflection 0.1
+                        reflection 0.05
                         metallic
                     }
                 }
             }
-            photons {
+            photons { 
+                target
                 refraction on
                 reflection on
             }
@@ -151,7 +152,7 @@ cylinder {
             }
         }
     }
-    photons { 
+    photons {  
         refraction on
         reflection on
     }
@@ -165,7 +166,7 @@ union{
             <0,0.9,0>, 0.28 
             material{
                 texture{  
-                    pigment{rgbf <0.760, 0.866, 0.878, 0.4>}
+                    pigment{rgbf <0.760, 0.866, 0.878, 0.6>}
                     finish{
                         ambient 0.1
                         diffuse 0.2

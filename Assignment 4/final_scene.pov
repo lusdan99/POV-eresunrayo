@@ -7,7 +7,7 @@
 #include "Desert.inc"
 #include "Starfield.inc"
 #include "Moon.inc"
-
+#include "oasis.inc"
 
 //############################################################################
 //Scene setting
@@ -21,7 +21,7 @@ camera{
 
 light_source{ 
     <-24,12,40> 
-    White
+    White*0.7
     parallel 
     photons{
         refraction on
@@ -58,8 +58,7 @@ object{
     desert
     scale<25,3,25>
     rotate y*-60
-    translate<3.5,-2,-10>
-    
+    translate<3.5,-2,-10> 
 }
 
 object {
@@ -68,14 +67,19 @@ object {
 
 object {
     moon
+    no_shadow
     scale 2
     translate <-30, 15, 50>
 }
-
  
 //############################################################################
 //Scene models
 //############################################################################
 
+object {
+    ufo
+    scale 4
+    translate <-1,1,2>
+}
 
-
+object{oasis}
