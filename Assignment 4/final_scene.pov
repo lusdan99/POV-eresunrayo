@@ -8,6 +8,7 @@
 #include "Starfield.inc"
 #include "Moon.inc"
 #include "oasis.inc"
+#include "cactus.inc"
 
 //############################################################################
 //Scene setting
