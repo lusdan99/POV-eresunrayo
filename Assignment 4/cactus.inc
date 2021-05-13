@@ -1,0 +1,214 @@
+#include "colors.inc"
+light_source{<1000, 1000, 1000>, White} 
+
+  camera{
+    location <-2.5, 2, -60>
+    look_at <6, 10, 4>
+    angle 30
+  }
+
+#declare cactusshape =
+union{
+
+
+    cylinder{
+    
+        <6,0,4>,<6,12,4>, 2   
+    
+    
+    }  
+    
+    difference{
+    
+        sphere{<6,12,4>, 2}
+        
+            cylinder{
+    
+        <6,4.5,4>,<6,12,4>, 2   
+    
+    
+    }  
+    
+    }
+       
+    cylinder{
+       <4,6,4>, <2,6,4>, 1
+    
+    
+    
+    }
+    
+    difference{
+              
+              
+      sphere{<2,6,4>,1}
+     union{
+     
+           cylinder{
+       <4,6,4>, <2,6,4>, 1
+        }
+        
+           cylinder{
+       <2,6,4>, <2,10,4>, 1.
+    } 
+     
+     
+     }
+    
+   
+    
+    
+    }
+    
+               cylinder{
+       <2,6,4>, <2,10,4>, 1
+    }   
+    
+     difference{
+    
+        sphere{<2,10,4>, 1}
+        
+            cylinder{
+    
+        <2,6,4>,<2,10,4>, 1   
+    
+    
+    }  
+    
+    }
+    
+   cylinder{
+       <8,8,4>, <10,8,4>, 1
+    
+    
+    
+    }
+    
+    difference{
+              
+              
+      sphere{<10,8,4>,1}
+     union{
+     
+               cylinder{
+           <8,8,4>, <10,8,4>, 1
+            }
+            
+               cylinder{
+           <10,8,4>, <10,10,4>, 1.
+        } 
+     
+     
+     }
+    
+   
+    
+    
+    }
+    
+               cylinder{
+       <10,8,4>, <10,10,4>, 1
+    }   
+    
+     difference{
+    
+        sphere{<10,10,4>, 1}
+        
+            cylinder{
+    
+        <10,8,4>,<10,10,4>, 1   
+    
+    
+    }  
+    
+    }
+    
+
+  pigment{ rgb 1*<.2,.9,.45> transmit 0 }
+    finish{
+    specular 0.7
+    roughness 0.00125
+    brilliance .005
+    phong .3
+    diffuse .8
+
+  } 
+}
+
+object{cactusshape} 
+
+
+#declare pinchos=
+
+object{
+     union{
+     
+        sphere{
+         <10, 1, 4>,0.3
+        }
+        
+        cone{<10,1,4>,0.2,<12,1,2>,0}    
+        
+        cone{<10,1,4>,0.2,<10,3,2>,0}
+        
+        cone{<10,1,4>,0.2,<8,1,2>,0}
+        cone{<10,1,4>,0.2,<10,-1,2>,0}
+        cone{<10,1,4>,0.2,<10.5,1,2>,0}
+       cone{<10,1,4>,0.2,<8.5,-0.5,2>,0}
+       cone{<10,1,4>,0.2,<8.5,2,2>,0}
+        
+        
+        
+           pigment{ White }
+     }      
+     
+     
+     
+
+}      
+
+object{pinchos
+
+
+} 
+
+#declare sombrero=
+
+object{
+
+union{
+difference{
+
+    cylinder{<1,1,4>, <1,1.5,4>,3 pigment{rgb<0.8,0.7,0.27> }}
+    cylinder{<1,0.9,4>, <1,1.4,4>,2.7 pigment{ rgb 0.4*<0.8,0.7,0.27> }} 
+     pigment{ White }
+    
+    } 
+cone{<1,1.5,4>,1.2,<1,2.15,4>,1
+pigment{ rgb<0.8,0.7,0.27> }}
+difference{
+             
+    sphere{<1,2,4>,1
+    pigment{ rgb<0.8,0.7,0.27> }}         
+    cone{<1,1.2,4>,2,<1,2,4>,1}
+
+    
+    } 
+    
+}
+
+ 
+
+
+
+
+}
+
+object{sombrero
+ rotate <10, 0, 0>
+scale 1.6
+translate<4.4,12,-3>
+
+
+}
+
