@@ -1,0 +1,28 @@
+#declare sand1 = 
+texture {
+    pigment {
+        colour rgb <0.75,0.55,0.35>
+    }
+    normal {
+        average
+        normal_map {
+            [0.5 wvs 1.0]
+            [0.5 wrinkles 1 scale 0.0025]
+        }
+    }
+    finish  {
+		ambient 0.15
+		diffuse 0.8
+	}
+}
+
+#declare desert=   
+height_field {
+    png "dunes_heightmap.png"
+    smooth
+    texture{
+        sand1
+    }
+    translate <-.5, 0, -.5>
+    scale <17, 1.75, 17>
+}
