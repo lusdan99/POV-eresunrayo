@@ -35,7 +35,7 @@
 //Light source
 light_source {
     <-5, 10, -5>
-    color rgb <1, 1, 1>
+    color rgb <1, 1, 1>*0.3
     parallel
     photons{
         refraction on
@@ -45,13 +45,13 @@ light_source {
 
 //Camera 
 camera {
-    location <0,1,1.5>
+    location <0,0.9,2>
     look_at <0,0.8,0>
     right x*image_width/image_height
 }
 
 //Floor
-/*plane { 
+plane { 
     <0,-1,0>, 0 
     texture {
         pigment {
@@ -61,7 +61,7 @@ camera {
 			diffuse 1.0
         } 
     }
-}*/
+}
   
 
   
@@ -113,8 +113,12 @@ intersection {
     #local X = 0.5*cos(A);
     #local Z = 0.5*sin(A);
     light_source {
-        <1*X,0.74,1*Z>
-        color White*0.5       
+        <1.15*X,0.6,1.1*Z>
+        color Cyan
+        spotlight
+        radius 20
+        falloff 35
+        point_at <X,0.75,Z>       
         photons{
             refraction on
             reflection on
@@ -124,15 +128,15 @@ intersection {
         <X,0.75,Z>, 0.03 
         material{
             texture{
-                pigment{ rgbf <0.345, 0.968, 0.992, 0.1>}
+                pigment{ rgbf <0.345, 0.968, 0.992, 0.8>}
                 finish{                 
                     ambient 0.1
-                    diffuse 0.5      
-                    reflection 0.9
+                    diffuse 0.3      
+                    reflection 0.3
                     specular 1
                     roughness 0.001
                     phong 0.9
-                    phong_size 20
+                    phong_size 1
                 }
             }    
             interior {
