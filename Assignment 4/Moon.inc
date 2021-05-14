@@ -51,4 +51,9 @@ sphere{
             scale 0.10
         }
     }
+    photons{
+	    target
+	    reflection on
+	    refraction on
+	}
 }

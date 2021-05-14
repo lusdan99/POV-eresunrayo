@@ -1,11 +1,11 @@
 #include "colors.inc"
-light_source{<1000, 1000, -1000>, White} 
+//light_source{<1000, 1000, -1000>, White} 
 
-camera{
+/*camera{
     location <-2.5, 2, -60>
     look_at <6, 10, 4>
     angle 30
-}
+}*/
 
 #declare cactusshape =
 union{
@@ -74,7 +74,7 @@ union{
     } 
 }
 
-object{cactusshape} 
+//object{cactusshape} 
 
 
 #declare pinchos=
@@ -93,7 +93,7 @@ union{
 }      
       
 
-object{pinchos} 
+//object{pinchos} 
 
 #declare sombrero=
 union{
@@ -117,13 +117,16 @@ union{
             pigment{ rgb<0.8,0.7,0.27> }
         }         
         cone{<1,1.2,4>,2,<1,2,4>,1}
-    } 
+    }
+    rotate <10, 0, 0>
+    scale 1.6
+    translate<4.4,12,-3> 
 }
 
-object{
+/*object{
     sombrero
     rotate <10, 0, 0>
     scale 1.6
     translate<4.4,12,-3>
-}
+}*/
 

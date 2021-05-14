@@ -348,12 +348,16 @@ Interpolate(xx,xa,xb,ya,yb,0)
  
 //==================================================
 //Map definitions
-#declare p_map1=pigment {image_map{jpeg "E:/Colegio/Uni/IG/cowmap.jpg"   transmit all 0 } }
- 
+#declare p_map1=pigment {image_map{jpeg "cowmap.jpg"   transmit all 0 } }
+
+global_settings {
+    assumed_gamma 1.0
+} 
 //==================================================
 //Material definitions
 #declare fur_=
 #declare PR_DIFFUSE=pigment{p_map1}
+
 
 
 #declare F1=finish{specular  0 //Max highlight intensity: 0 -> 1

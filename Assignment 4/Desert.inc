@@ -38,4 +38,9 @@ height_field {
     texture{
         sand1
     }
+    photons{
+	    target
+	    reflection on
+	    refraction on
+	}
 }

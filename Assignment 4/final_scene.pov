@@ -9,6 +9,7 @@
 #include "Moon.inc"
 #include "oasis.inc"
 #include "cactus.inc"
+#include "vache1_POV_geom.inc"
 
 //############################################################################
 //Scene setting
@@ -45,7 +46,7 @@ light_source{
 
 global_settings {
     photons {
-        spacing 0.005
+        spacing 0.01
     }
     assumed_gamma 1.0
     max_trace_level 5
@@ -60,6 +61,13 @@ object{
     scale<25,3,25>
     rotate y*-60
     translate<3.5,-2,-10> 
+}
+
+object{
+    desert
+    scale<25,3,25>
+    rotate y*-60
+    translate<-15,-2.5,-5> 
 }
 
 object {
@@ -80,7 +88,23 @@ object {
 object {
     ufo
     scale 4
-    translate <-1,1,2>
+    translate <-0.9,1,1.5>
 }
 
-object{oasis}
+object{
+    vache1_
+    scale 2
+    rotate <0,-90,0>
+    translate<-1,-0.5,1>
+}
+
+union{
+    object{cactusshape}
+    object{sombrero}
+    scale .1
+    rotate <0,15,0>
+    translate<-6.5,0,10>
+}
+
+object{oasis}   
+
